@@ -168,8 +168,12 @@ export default {
     show () {
       this.display = true
       if (!this.wheels.length || this.dataChange) {
-        this.dataType === DATA_CASCADE && this._updatePickerData()
         this.$nextTick(() => {
+          if (this.dataType === DATA_CASCADE) {
+            this._updatePickerAnchor()
+            this._updatePickerData()
+          }
+
           const wheelWrapper = this.$refs.wheelWrapper
           this.pickerData.forEach((item, index) => {
             this._createWheel(wheelWrapper, index).enable()
@@ -265,6 +269,10 @@ export default {
           wheel.destroy()
         })
       }
+    },
+
+    _updatePickerAnchor () {
+      this.pickerAnchor = this.proxyAnchor
     },
 
     _updatePickerData (wheelIndex = 0) {

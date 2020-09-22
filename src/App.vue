@@ -127,6 +127,8 @@ export default {
     },
 
     showPicker1 () {
+      this.picker1.anchor = [2, 2]
+
       this.$refs.picker1.show()
     },
     handlePicker1Confirm (v) {
